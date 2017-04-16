@@ -4,20 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.project.tysamurai.projectmusic.MainActivity">
+    android:id="@+id/main"
+    tools:context="com.project.tysamurai.projectmusic.MainActivity"
+    android:weightSum="1">
 
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="470dp"
+        android:layout_height="327dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"
-        android:id="@+id/song_list"/>
+        android:id="@+id/song_list"
+        android:layout_weight="0.58" />
 
-    <FrameLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/musicControls">
+        android:layout_height="60dp"
+        android:layout_weight="0.21"
+
+        android:background="@color/red"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/current_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:textColor="@color/white"
+            android:text="No song selected"
+            android:layout_above="@+id/current_artist"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/current_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="please play a song"
+            android:layout_alignBottom="@+id/button2"
+            android:layout_alignStart="@+id/current_title" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:scaleX=".5"
+            android:scaleY=".5"
+            android:transformPivotX="0dp"
+            android:transformPivotY="0dp"
+
+            android:max="5"
+            android:layout_alignBottom="@+id/current_artist"
+            android:layout_alignStart="@+id/current_title" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="submit"
+            android:layout_marginEnd="14dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/musicControls"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_weight="0.21">
+
 
     </FrameLayout>
 

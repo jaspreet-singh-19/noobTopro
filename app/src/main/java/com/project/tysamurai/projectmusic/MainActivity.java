@@ -7,16 +7,25 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
+import android.widget.PopupWindow;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements MediaController.MediaPlayerControl {
@@ -26,8 +35,12 @@ public class MainActivity extends AppCompatActivity implements MediaController.M
     private boolean musicBound=false;
     private MusicController controller;
     private boolean paused=false, playbackPaused=false;
+    LinearLayout main;
+    RatingBar ratingbar;
+    public PopupWindow popupWindow;
+    String displayTitle,displayArtist;
 
-
+    TextView currentTitle,currentArtist;
     SongRVAdaptor adaptor;
     RecyclerView songview;
     ArrayList<Songs> songlist;
@@ -46,8 +59,20 @@ public class MainActivity extends AppCompatActivity implements MediaController.M
 
         songview.setLayoutManager(new LinearLayoutManager(this));
 
+        ratingbar=(RatingBar) findViewById(R.id.ratingBar);
+        ratingbar.setScrollBarSize(20);
+        ratingbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                Toast.makeText(MainActivity.this, String.valueOf(ratingBar.getRating()), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         adaptor=new SongRVAdaptor();
         songview.setAdapter(adaptor);
+        currentArtist=(TextView) findViewById(R.id.current_artist);
+        currentTitle=(TextView) findViewById(R.id.current_title);
+        main=(LinearLayout) findViewById(R.id.main);
 
         setController();
 
@@ -261,8 +286,8 @@ public class MainActivity extends AppCompatActivity implements MediaController.M
         @Override
         public void onBindViewHolder(SongHolder holder, final int position) {
 
-            String displayTitle=songlist.get(position).getTitle();
-            String displayArtist=songlist.get(position).getArtist();
+            displayTitle=songlist.get(position).getTitle();
+            displayArtist=songlist.get(position).getArtist();
 
             if(displayTitle.length()>30){
                 displayTitle=displayTitle.substring(0,31) + "...";
@@ -277,19 +302,41 @@ public class MainActivity extends AppCompatActivity implements MediaController.M
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ratingbar.setVisibility(View.VISIBLE);
+                    ratingbar.setRating(0);
                     musicSrv.setSong(position);
                     musicSrv.playSong();
+                    String showTitle=songlist.get(position).getTitle();
+                    String showArtist=songlist.get(position).getArtist();
+
+                    if(showTitle.length()>30){
+                        showTitle=showTitle.substring(0,31) + "...";
+                    }
+                    if(showArtist.length()>30){
+                        showArtist=showArtist.substring(0,31) + "...";
+                    }
+                    currentTitle.setText(showTitle);
+                    currentArtist.setText(showArtist);
+
                     if(playbackPaused){
                         setController();
                         playbackPaused=false;
                     }
+
                     controller.hide();
                     controller.show();
+
                     if(musicSrv!=null && musicSrv.isPng()) {
                         musicSrv.seek(0);
                     }
+
+//                    if(popupWindow!=null){
+//                        popupWindow.dismiss();
+//                    }
                 }
             });
+
+
         }
 
         @Override
@@ -299,4 +346,39 @@ public class MainActivity extends AppCompatActivity implements MediaController.M
     }
 
     //-----------------------------------------------------------------------------
+
+//    public void setPopup(){
+//        LayoutInflater inflator=(LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+//
+//        View popupView=inflator.inflate(R.layout.rating_popup,null);
+//
+//        popupWindow=new PopupWindow(popupView,900,500);
+//
+//        if(Build.VERSION.SDK_INT>=21) {
+//            popupWindow.setElevation(5.0f);
+//        }
+//
+//        Button send,cancel;
+//
+//        send=(Button) popupView.findViewById(R.id.send);
+//        send.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this, "data sending", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//
+//        cancel=(Button) popupView.findViewById(R.id.cancel);
+//
+//        cancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                popupWindow.dismiss();
+//            }
+//        });
+//
+//
+//        popupWindow.showAtLocation(main, Gravity.TOP,0,0);
+//    }
 }
