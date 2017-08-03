@@ -1,0 +1,31 @@
+
+
+added to app level build.gradle
+dependencies {
+    compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+}
+
+added to project level build.gradle
+
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+
+added INTERNET permission in menifest
+
+
+
+-------------------------------------------------------------------------
+
+
+added to app level build.gradle
+
+    compile 'com.android.volley:volley:1.0.0'
+    compile 'com.google.code.gson:gson:2.6.2'
+       compile 'com.squareup.picasso:picasso:2.5.2'
+
+
+
+added mip map default_img

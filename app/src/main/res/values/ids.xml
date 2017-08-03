@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="powerbutton" type="id" />
+    <item name="powerButton" type="id">1</item>
+    <item name="et" type="id" />
+    <item name="imagebtn" type="id" />
+    <item name="tv1" type="id" />
+    <item name="tv2" type="id" />
+    <item name="tv3" type="id" />
+    <item name="tv4" type="id" />
+    <item name="tv5" type="id" />
+</resources>

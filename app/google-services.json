@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "336500527228",
+    "firebase_url": "https://projectmusic-bf0b4.firebaseio.com",
+    "project_id": "projectmusic-bf0b4",
+    "storage_bucket": "projectmusic-bf0b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336500527228:android:6fa8aa565b2316f1",
+        "android_client_info": {
+          "package_name": "com.project.tysamurai.projectmusic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336500527228-pgrfetp0gcs8cl6643rba064nb0afg52.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.tysamurai.projectmusic",
+            "certificate_hash": "ad4a775bed550e3ba8764d16a89edd0b4e8f8ed9"
+          }
+        },
+        {
+          "client_id": "336500527228-2e3887rn3vlf11srmqlpg1g2g6p01g0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJYwRd_JPT1De0obfhVTaAxHKbX0MPKmI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336500527228-2e3887rn3vlf11srmqlpg1g2g6p01g0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
